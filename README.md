@@ -1,0 +1,1 @@
+An exercise for GitHub Actions
