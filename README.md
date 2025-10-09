@@ -49,6 +49,17 @@ jobs:
             dist
             package.json
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with: 
+          name: dist-files
+      - name: Deploy
+        run: echo "Deploying..."
+
 ---
 
 The above workflow will:
@@ -57,3 +68,4 @@ The above workflow will:
 3. Install dependencies using `npm ci`.  
 4. Build the project with `npm run build`.  
 5. Upload the `dist` folder and `package.json` as an artifact for download.
+6. Download this artifact later in another job (for example, deployment).
